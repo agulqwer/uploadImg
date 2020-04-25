@@ -1,0 +1,24 @@
+{
+  "name": "uploadImg",
+  "version": "1.0.0",
+  "description": "图片上传控件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agulqwer/uploadImg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agulqwer/uploadImg/issues"
+  },
+  "homepage": "https://github.com/agulqwer/uploadImg#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
