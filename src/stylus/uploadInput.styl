@@ -1,0 +1,41 @@
+    /* 上传按钮控件---start */
+    .updateFile
+        width: 108px;
+        height: 108px;
+        position: relative;  
+        padding: 4px;
+        box-sizing: content-box;
+        
+        .addIcon
+            width: 0;
+            height: 0;
+            outline-style: none;
+            border: 1rem solid transparent;
+            border-radius: 50%;
+            box-shadow: 0px 0px 0 4px #fff;
+            padding: 0;
+            box-sizing: border-box;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+        
+            &:before
+                position: fixed;
+                width: 75.6px;
+                height: 4px;
+                background: #fff;
+                border-radius: 2px;
+                content: '';
+                margin-left: -37.8px;
+        
+            &:after
+                position: fixed;
+                width: 75.6px;
+                height: 4px;
+                background: #fff;
+                border-radius: 2px;
+                content: '';
+                margin-left: -37.8px;
+                transform: rotate(90deg) translateY(-1.8em);
+                transform-origin: center -1.8em;
+        /* 上传按钮控件---end */
