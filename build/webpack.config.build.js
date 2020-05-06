@@ -4,6 +4,8 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 //去除无用css
 const purgeCssPlugin = require('purgecss-webpack-plugin');
+//引入PWA插件
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const path = require('path');
 const glob = require('glob');
@@ -65,5 +67,10 @@ module.exports = {
         new purgeCssPlugin({
             paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true})
         }),
+        // 配置 PWA
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true
+        })
     ]
 }
