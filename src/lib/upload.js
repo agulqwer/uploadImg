@@ -1,5 +1,5 @@
  //文件处理类
- class File{
+ export default class File{
     constructor(verify){
         //存储文件数据
         this.fileData = [];
@@ -151,7 +151,4 @@
         })
     
     }
-}
-module.exports  = {
-    File
 }
