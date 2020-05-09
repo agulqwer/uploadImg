@@ -1,0 +1,129 @@
+@import 'uploadInput'
+*
+    margin: 0;
+    padding: 0;
+
+html, body
+    height: 100%;
+
+body
+    background: url(../images/bg.png) no-repeat 50% 0%;
+    background-size: cover;
+    color:#fff;
+    text-align: center;
+    position: relative;
+
+#canvas
+    position: absolute;
+    z-index: -20;
+    top: 0;
+    left:0;
+        
+ #holder
+    position: absolute;
+    width: 810px; 
+    height: 324px; 
+    line-height: 324px; 
+    font-size: 37.8px;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.5);
+
+    // 上传文件按钮，根据是否选中图片来变化input元素位置
+    &.updateHolder
+        display: flex;
+        flex-flow: wrap;
+        padding: 30px;
+        box-sizing: border-box;
+        
+        .updateImg
+            width: 108px;
+            height: 108px;
+            margin-right: 30px;
+        
+        #updateFile
+            margin: unset;
+            top: unset;
+            transform: scale(.7);
+          
+    &.hover
+        border: 3px dashed #f00;
+        
+    &.normal
+        border: 3px dashed #fff;
+
+    #updateFile
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-50%);
+
+
+//模态框弹窗动画
+@keyframes modal_animate 
+    from
+        transform: translate(-50%, -100%);
+        opacity: 0;
+
+    to
+        transform: translate(-50%, 10%);
+        opacity: 1;
+            
+        
+//模态框弹窗样式
+
+#modal
+    &.show
+        height: 100%;
+        background: rgba(0,0,0,.5);
+        position: absolute;
+        width: 100%;
+        
+        .modal_container
+            animation : modal_animate .5s linear forwards;
+        
+        
+    .modal_container
+        background: #fff;
+        box-shadow: 0px 0px 10px 5px #000;
+        width: 432px;
+        color: #000;
+        margin: 0 auto;
+        border-radius: 5px;
+        text-align: left;
+        z-index: 12;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        opacity: 0;
+        
+        h2
+            border-bottom: 1px solid #ccc;
+            font-size: 21.6px;
+            padding: 16.2px 10.8px;
+        
+        .modal_content
+            border-bottom: 1px solid #ccc;
+            font-size: 16.2px;
+            padding: 27px 10.8px;
+        
+        .modal_content p
+            margin-bottom: 10px;
+
+            &:last-child
+                margin-bottom: 0;
+
+        .modal_operate
+            padding: 16.2px 10.8px;
+            overflow: hidden;
+
+            button 
+                float: right;
+                outline: none;
+                color: #fff;
+                background: #00a1ff;
+                border: 0;
+                padding: 10.8px 21.6px;
+                font-size: 16.2px;
+                border-radius: 10px;
+        
