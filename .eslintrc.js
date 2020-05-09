@@ -6,7 +6,7 @@ module.exports = {
 		"node": true
 	},
 	rules: {
-		"global-require": 0  
+		"global-require": 0
 	},
 	
 }

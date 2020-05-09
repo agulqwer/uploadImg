@@ -1,11 +1,14 @@
 // 将css单独打包成文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // 压缩css
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // 去除无用css
 const PurgeCssPlugin = require('purgecss-webpack-plugin');
 // 引入PWA插件
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+
 
 const path = require('path');
 const glob = require('glob');
@@ -24,11 +27,6 @@ module.exports = {
       chunks: 'all',
       name: true,
       cacheGroups: {
-        jquery: {
-          test: /jquery/,
-          name: 'lib/jquery',
-          priority: 2,
-        },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'lib/vendors',
@@ -43,7 +41,7 @@ module.exports = {
       moduleFilename: ({ name, entryModule }) => {
         const moduleName = entryModule.context.split('js\\');
         const pageName = name.replace(moduleName[1], '');
-        return `css/${moduleName[1]}/${pageName}-[contenthash:5].css`;
+        return `public/css/${moduleName[1]}/${pageName}-[contenthash:5].css`;
       },
     }),
     // 压缩css
@@ -72,5 +70,16 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
     }),
+    new ParallelUglifyPlugin({
+      cacheDir: '.cache/',
+      uglifyJS: {
+        output: {
+          comments: false,
+        },
+        warnings: false,
+
+      },
+    }),
+
   ],
 };

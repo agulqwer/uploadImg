@@ -70,32 +70,10 @@ module.exports = {
       loader: 'url-loader',
       options: {
         name: '[name].[ext]',
-        publicPath: '../../images/', // 访问的相对路径
-        outputPath: './images',
+        publicPath: '/public/images/', // 访问的相对路径
+        outputPath: 'public/images',
         esModules: false,
         limit: 10000, // 限制10k的大小，小于10k生成base64
-      },
-    },
-    {
-      loader: 'image-webpack-loader',
-      options: {
-        mozjpeg: {
-          progessive: true,
-          quality: 65,
-        },
-        optipng: {
-          enabled: true,
-        },
-        pngquant: {
-          quality: [0.65, 0.90],
-          speed: 4,
-        },
-        gifsicle: {
-          interlaced: false,
-        },
-        webp: {
-          quality: 75,
-        },
       },
     },
   ],

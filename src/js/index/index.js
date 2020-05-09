@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 import '../../stylus/index.styl';
-import $ from 'jquery';
+// import $ from 'jquery';
 //在upload模块中包含了promise，所以这里只能使用动态import的方式导入
 //但是upload模块中使用module.exports的CommonJS的规范方式导出，这里直接使用import的方式静态导入是不会报错的，不过这种方式有时会遇到bug
 //所以这里我们推荐使用ES6的export + import的模块规范来写
@@ -82,12 +82,12 @@ window.onload = function(){
     //获取PWA配置
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-        .register('../../service-worker.js')
+        .register('../../../service-worker.js')
         .then(registration => {
-          console.log('service-worker registed')
+        //   console.log('service-worker registed11')
         })
         .catch(error => {
-          console.log('service-worker registed error')
+        //   console.log('service-worker registed error111')
         })
     }
 }

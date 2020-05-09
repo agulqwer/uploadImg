@@ -24,7 +24,7 @@ module.exports = () => {
       // html模板所在的路径
       template: path.resolve(projectRoot, `src/view/${moduleName}/${pageName}.html`),
       // 输出html的文件名陈
-      filename: `./view/${moduleName}/${pageName}.html`,
+      filename: `./app/view/${moduleName}/${pageName}.html`,
       // 配置多入口，对应output中多入口的name值
       chunks: [entryName],
       /*
