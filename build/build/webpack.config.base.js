@@ -1,5 +1,6 @@
 // 连接数组并合并对象
 const merge = require('webpack-merge');
+const fs = require('fs');
 // 引入webpack
 const webpack = require('webpack');
 // 将css单独打包成文件
@@ -26,6 +27,9 @@ const HtmlWebpackPlugin = require('./webpack.htmlwebpackplugin.js');
 
 // 获取入口文件和htmlwebpackplugin插件配置
 const { entry, htmlWebpackPlugins } = HtmlWebpackPlugin();
+//读取路径配置文件
+const { buildConfig } = require('./build.js');
+console.log("路径", buildConfig.outputPath);
 // 获取项目根目录
 const projectRoot = process.cwd();
 // 自定义plugins数组
@@ -38,7 +42,7 @@ const generateConfig = (env) => ({
   entry,
   output: {
     // 构建文件的输出目录
-    path: path.join(projectRoot, './dist'),
+    path: path.join(projectRoot, buildConfig.outputPath),
     // 文件名
     filename: ({ chunk }) => {
       // 获取模块路径
@@ -48,17 +52,20 @@ const generateConfig = (env) => ({
       } else {
         entryModule = chunk.entryModule.dependencies[2].module;
       }
-      const moduleName = entryModule.context.split('js\\');
+      let a = entryModule.context.split('js\\');
+      a = a[1].split('\\');
+      const moduleName = a[0];
+      const pageName = a[1];
       // 获取文件名
-      const pageName = chunk.name.replace(moduleName[1], '');
+      const fileName = chunk.name.replace(moduleName+pageName, '');
       // 返回文件名
       if (env === 'production') {
-        return `public/js/${moduleName[1]}/${pageName}-[chunkhash:5].js`;
+        return `${buildConfig.publicPath}/${moduleName}/js/${pageName}/${fileName}-[chunkhash:5].js`;
       }
-      return `public/js/${moduleName[1]}/${pageName}.js`;
+      return `${buildConfig.publicPath}/${moduleName}/js/${pageName}/${fileName}.js`;
     },
     // 分离块的文件名
-    chunkFilename: env === 'production' ? 'public/js/[name]-[chunkhash:5].js' : 'public/js/[name].js',
+    chunkFilename: env === 'production' ? `${buildConfig.publicPath}/common/[name]-[chunkhash:5].js` : `${buildConfig.publicPath}/common/[name].js`,
     publicPath: '/',
   },
   module: {
@@ -73,15 +80,15 @@ const generateConfig = (env) => ({
         use: webpackLoader.scriptLoader,
       },
       // 解析css
-      // {
-      //   test: /\.css$/,
-      //   use: webpackLoader.cssLoader(env, miniCssExtractPlugin),
-      // },
+      {
+        test: /\.css$/,
+        use: webpackLoader.cssLoader(env, miniCssExtractPlugin),
+      },
       // 解析stylus
       {
         test: /\.styl$/,
         // exclude: path.join(projectRoot, 'node_modules'),
-        include: path.join(projectRoot, 'src/stylus'),
+        include: path.join(projectRoot, 'src/css'),
         use: webpackLoader.stylusLoader(env, miniCssExtractPlugin),
       },
       // 解析图片

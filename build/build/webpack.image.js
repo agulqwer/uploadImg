@@ -1,17 +1,37 @@
 const fs = require('fs');
 const path = require('path');
-
 const projectRoot = process.cwd();
-const files = fs.readdirSync(path.join(projectRoot, 'dist/public/images'));
-const fileArr = [];
-files.forEach((file) => {
-  fileArr.push(
-    path.join(projectRoot, 'dist/public/images', file),
-  );
-});
+
+//定义一个函数遍历目录下所有的文件
+function readFileList(dir, filesList = []){
+  //去读该目录
+  const files = fs.readdirSync(dir);
+  //遍历文件
+  files.forEach((item, index) => {
+      //获取完整的路径
+      const fullPath = path.join(dir, item);
+      //获取路径信息
+      const stat = fs.statSync(fullPath);
+      //判断是否为一个文件夹
+      if(stat.isDirectory()){
+         //这是一个文件夹，递归读取文件
+         readFileList(path.join(dir, item), filesList);
+      }  else {
+        //这是一个文件，添加入数组
+        filesList.push(fullPath);
+      }
+  });
+  //返回文件路径数组
+  return filesList;
+}
+var filesList = [];
+readFileList(path.join(projectRoot, 'src/images'),filesList);
 
 module.exports = {
-  entry: fileArr,
+  entry: filesList,
+  output: {
+    path: path.join(projectRoot)
+  },
   module: {
     rules: [
       {
@@ -25,8 +45,11 @@ module.exports = {
             loader: 'url-loader',
             options: {
               name: '[name].[ext]',
-              publicPath: '/public/images/', // 访问的相对路径
-              outputPath: 'public/images',
+              outputPath: (...data) => {
+                
+                const path = data[1].replace(data[2], '');
+                return path;
+              },
               esModules: false,
               limit: 10000, // 限制10k的大小，小于10k生成base64
             },

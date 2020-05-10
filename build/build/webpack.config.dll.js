@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+//读取路径配置文件
+const { buildConfig } = require('./build.js');
 // 获取项目根目录
 const projectRoot = process.cwd();
 // 自动引入dll中的文件
@@ -14,8 +16,8 @@ files.forEach((file) => {
     dllPlugins.push(
       new AddAssetHtmlWebpackPlugin({
         filepath: path.resolve(projectRoot, 'dll', file),
-        outputPath: 'dll',
-        publicPath: '/dll',
+        outputPath: `${buildConfig.publicPath}/dll`,
+        publicPath: `/${buildConfig.publicPath}/dll`,
       }),
     );
   }

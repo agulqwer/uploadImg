@@ -70,8 +70,24 @@ module.exports = {
       loader: 'url-loader',
       options: {
         name: '[name].[ext]',
-        publicPath: '/public/images/', // 访问的相对路径
-        outputPath: 'public/images',
+        publicPath: (...data)=>{
+          let a = data[1].replace(data[0], '');
+          a = a.replace(data[2], '');
+          a = a.split("\\");
+          const path = a.filter((v)=>{
+            return v;
+          })
+          return `/public/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
+        }, // 访问的相对路径
+        outputPath: (...data)=>{
+          let a = data[1].replace(data[0], '');
+          a = a.replace(data[2], '');
+          a = a.split("\\");
+          const path = a.filter((v)=>{
+            return v;
+          });
+          return `public/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
+        },
         esModules: false,
         limit: 10000, // 限制10k的大小，小于10k生成base64
       },
