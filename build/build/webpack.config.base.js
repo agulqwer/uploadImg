@@ -107,10 +107,10 @@ const generateConfig = (env) => ({
   },
   plugins: [
     // 清理构建目录
-    // new CleanWebpackPlugin({
-    //   // 在构建前需要清理的目录
-    //   cleanOnceBeforeBuildPatterns: ['app', 'public'],
-    // }),
+    new CleanWebpackPlugin({
+      // 在构建前需要清理的目录
+      cleanOnceBeforeBuildPatterns: buildConfig.cleanPath,
+    }),
     ...htmlWebpackPlugins,
     // dll配置
     ...dllPlugins,

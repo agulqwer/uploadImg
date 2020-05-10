@@ -6,5 +6,5 @@ module.exports.buildConfig = {
     //html输出路径
     "htmlPath": 'application',
     //构建前需要清理的目录
-    // "cleanPath" : ['application', 'public/static']
+    "cleanPath" : ['public/static']
 }
