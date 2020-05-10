@@ -48,17 +48,20 @@ const generateConfig = (env) => ({
       } else {
         entryModule = chunk.entryModule.dependencies[2].module;
       }
-      const moduleName = entryModule.context.split('js\\');
+      let a = entryModule.context.split('js\\');
+      a = a[1].split('\\');
+      const moduleName = a[0];
+      const pageName = a[1];
       // 获取文件名
-      const pageName = chunk.name.replace(moduleName[1], '');
+      const fileName = chunk.name.replace(moduleName+pageName, '');
       // 返回文件名
       if (env === 'production') {
-        return `public/js/${moduleName[1]}/${pageName}-[chunkhash:5].js`;
+        return `public/${moduleName}/js/${pageName}/${fileName}-[chunkhash:5].js`;
       }
-      return `public/js/${moduleName[1]}/${pageName}.js`;
+      return `public/${moduleName}/js/${pageName}/${fileName}.js`;
     },
     // 分离块的文件名
-    chunkFilename: env === 'production' ? 'public/js/[name]-[chunkhash:5].js' : 'public/js/[name].js',
+    chunkFilename: env === 'production' ? 'public/common/[name]-[chunkhash:5].js' : 'public/common/[name].js',
     publicPath: '/',
   },
   module: {
@@ -73,15 +76,15 @@ const generateConfig = (env) => ({
         use: webpackLoader.scriptLoader,
       },
       // 解析css
-      // {
-      //   test: /\.css$/,
-      //   use: webpackLoader.cssLoader(env, miniCssExtractPlugin),
-      // },
+      {
+        test: /\.css$/,
+        use: webpackLoader.cssLoader(env, miniCssExtractPlugin),
+      },
       // 解析stylus
       {
         test: /\.styl$/,
         // exclude: path.join(projectRoot, 'node_modules'),
-        include: path.join(projectRoot, 'src/stylus'),
+        include: path.join(projectRoot, 'src/css'),
         use: webpackLoader.stylusLoader(env, miniCssExtractPlugin),
       },
       // 解析图片
@@ -116,12 +119,12 @@ const generateConfig = (env) => ({
   ].concat(customPlugins),
   // 优化
   optimization: {
-    minimizer: [
-      new TerserPlugin({
-        parallel: true,
-        cache: true,
-      }),
-    ],
+    // minimizer: [
+    //   new TerserPlugin({
+    //     parallel: true,
+    //     cache: true,
+    //   }),
+    // ],
   },
 });
 

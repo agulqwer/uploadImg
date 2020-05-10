@@ -1,5 +1,5 @@
 import '@babel/polyfill';
-import '../../stylus/index.styl';
+import '../../../css/home/index/index.styl';
 // import $ from 'jquery';
 //在upload模块中包含了promise，所以这里只能使用动态import的方式导入
 //但是upload模块中使用module.exports的CommonJS的规范方式导出，这里直接使用import的方式静态导入是不会报错的，不过这种方式有时会遇到bug
@@ -76,7 +76,7 @@ function handleFile(drapDom, inputDrom, modalDom, fileModule){
     }
 }
 window.onload = function(){
-    import(/* webpackChunkName: "index/upload" */'../../lib/upload').then((moduleName) => {
+    import(/* webpackChunkName: "upload" */'../../../lib/upload').then((moduleName) => {
         handleFile(holder, addFile, modal, moduleName.default);
     })
     //获取PWA配置

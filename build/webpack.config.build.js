@@ -25,11 +25,13 @@ module.exports = {
     // 拆分模块
     splitChunks: {
       chunks: 'all',
-      name: true,
+      name: '[name]',
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'lib/vendors',
+          name: ()=>{
+            return 'vendors';
+          },
           priority: 1,
         },
       },
@@ -39,9 +41,13 @@ module.exports = {
     // 分离css
     new MiniCssExtractPlugin({
       moduleFilename: ({ name, entryModule }) => {
-        const moduleName = entryModule.context.split('js\\');
-        const pageName = name.replace(moduleName[1], '');
-        return `public/css/${moduleName[1]}/${pageName}-[contenthash:5].css`;
+        let a = entryModule.context.split('js\\');
+        a = a[1].split('\\');
+        const moduleName = a[0];
+        const pageName = a[1];
+        // 获取文件名
+        const fileName = name.replace(moduleName+pageName, '');
+        return `public/${moduleName}/css/${pageName}/${fileName}-[contenthash:5].css`;
       },
     }),
     // 压缩css

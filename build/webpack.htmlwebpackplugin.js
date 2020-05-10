@@ -9,22 +9,23 @@ module.exports = () => {
   // 获取根目录
   const projectRoot = process.cwd();
   // 获取入口文件
-  const entryFiles = glob.sync(path.resolve(projectRoot, './src/js/*/*.js'));
+  const entryFiles = glob.sync(path.resolve(projectRoot, './src/js/*/*/*.js'));
   // 获取入口文件模块名
   Object.keys(entryFiles).map((index) => {
     const entryFile = entryFiles[index];
     // 通过正则获取入口名
-    const match = entryFile.match(/src\/js\/(.*)\/(.*).js/);
+    const match = entryFile.match(/src\/js\/(.*)\/(.*)\/(.*).js/);
     const moduleName = match && match[1];
     const pageName = match && match[2];
-    const entryName = moduleName + pageName;
+    const fileName = match && match[3];
+    const entryName =moduleName + pageName + fileName;
     entry[entryName] = entryFile;
     // 设置html-webpack-plugin插件配置
     return htmlWebpackPlugins.push(new HtmlWebpackPlugin({
       // html模板所在的路径
-      template: path.resolve(projectRoot, `src/view/${moduleName}/${pageName}.html`),
+      template: path.resolve(projectRoot, `src/view/${moduleName}/${pageName}/${fileName}.html`),
       // 输出html的文件名陈
-      filename: `./app/view/${moduleName}/${pageName}.html`,
+      filename: `./app/${moduleName}/view/${pageName}/${fileName}.html`,
       // 配置多入口，对应output中多入口的name值
       chunks: [entryName],
       /*

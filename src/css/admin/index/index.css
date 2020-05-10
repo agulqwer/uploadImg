@@ -1,0 +1,11 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+body{
+    background: url(../../../images/admin/index/bg.png) no-repeat 50% 0%;
+}
+h1{
+    font-size: 40px;
+    color: blue;
+}
