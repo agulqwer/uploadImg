@@ -4,5 +4,7 @@ module.exports.buildConfig = {
     //静态资源存放目录
     "publicPath": 'public/static',
     //html输出路径
-    "htmlPath": 'application'
+    "htmlPath": 'application',
+    //构建前需要清理的目录
+    // "cleanPath" : ['application', 'public/static']
 }

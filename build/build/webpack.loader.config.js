@@ -1,3 +1,6 @@
+//读取路径配置文件
+const { buildConfig } = require('./build.js');
+
 module.exports = {
   // 脚本文件处理
   scriptLoader: [
@@ -77,7 +80,7 @@ module.exports = {
           const path = a.filter((v)=>{
             return v;
           })
-          return `/public/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
+          return `/${buildConfig.publicPath}/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
         }, // 访问的相对路径
         outputPath: (...data)=>{
           let a = data[1].replace(data[0], '');
@@ -86,7 +89,7 @@ module.exports = {
           const path = a.filter((v)=>{
             return v;
           });
-          return `public/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
+          return `${buildConfig.publicPath}/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
         },
         esModules: false,
         limit: 10000, // 限制10k的大小，小于10k生成base64

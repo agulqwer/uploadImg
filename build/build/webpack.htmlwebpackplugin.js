@@ -1,6 +1,8 @@
 const glob = require('glob');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+//读取路径配置文件
+const { buildConfig } = require('./build.js');
 
 module.exports = () => {
   // 定义入口和htmlWebpackplugin变量
@@ -25,7 +27,7 @@ module.exports = () => {
       // html模板所在的路径
       template: path.resolve(projectRoot, `src/view/${moduleName}/${pageName}/${fileName}.html`),
       // 输出html的文件名陈
-      filename: `./app/${moduleName}/view/${pageName}/${fileName}.html`,
+      filename: `./${buildConfig.buildConfig}/${moduleName}/view/${pageName}/${fileName}.html`,
       // 配置多入口，对应output中多入口的name值
       chunks: [entryName],
       /*

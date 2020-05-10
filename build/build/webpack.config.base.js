@@ -29,7 +29,6 @@ const HtmlWebpackPlugin = require('./webpack.htmlwebpackplugin.js');
 const { entry, htmlWebpackPlugins } = HtmlWebpackPlugin();
 //读取路径配置文件
 const { buildConfig } = require('./build.js');
-console.log("路径", buildConfig.outputPath);
 // 获取项目根目录
 const projectRoot = process.cwd();
 // 自定义plugins数组
@@ -108,10 +107,10 @@ const generateConfig = (env) => ({
   },
   plugins: [
     // 清理构建目录
-    new CleanWebpackPlugin({
-      // 在构建前需要清理的目录
-      cleanOnceBeforeBuildPatterns: ['app', 'public'],
-    }),
+    // new CleanWebpackPlugin({
+    //   // 在构建前需要清理的目录
+    //   cleanOnceBeforeBuildPatterns: ['app', 'public'],
+    // }),
     ...htmlWebpackPlugins,
     // dll配置
     ...dllPlugins,
