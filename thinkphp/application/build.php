@@ -18,14 +18,14 @@ return [
         '__file__'   => ['common.php'],
         '__dir__'    => ['behavior', 'controller', 'model', 'view'],
         'controller' => ['Index'],
-        'model'      => ['User', 'UserType'],
+        'model'      => ['Index'],
         'view'       => ['index/index'],
     ],
     'admin'     => [
         '__file__'   => ['common.php'],
         '__dir__'    => ['behavior', 'controller', 'model', 'view'],
         'controller' => ['Index'],
-        'model'      => ['User', 'UserType'],
+        'model'      => ['Index'],
         'view'       => ['index/index'],
     ],
 

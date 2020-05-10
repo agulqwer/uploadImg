@@ -3,7 +3,7 @@ namespace app\admin\model;
 
 use think\Model;
 
-class UserType extends Model
+class Index extends Model
 {
 
 }
