@@ -17,7 +17,7 @@ files.forEach((file) => {
       new AddAssetHtmlWebpackPlugin({
         filepath: path.resolve(projectRoot, 'dll', file),
         outputPath: `${buildConfig.publicPath}/dll`,
-        publicPath: `/${buildConfig.publicPath}/dll`,
+        publicPath: `/${buildConfig.relativePath}/dll`,
       }),
     );
   }

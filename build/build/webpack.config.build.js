@@ -50,6 +50,7 @@ module.exports = {
         const fileName = name.replace(moduleName+pageName, '');
         return `${buildConfig.publicPath}/${moduleName}/css/${pageName}/${fileName}-[contenthash:5].css`;
       },
+      publicPath: buildConfig.relativePath
     }),
     // 压缩css
     new OptimizeCssAssetsPlugin({

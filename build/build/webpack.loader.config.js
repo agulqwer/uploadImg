@@ -73,6 +73,7 @@ module.exports = {
       loader: 'url-loader',
       options: {
         name: '[name].[ext]',
+        // 访问的相对路径
         publicPath: (...data)=>{
           let a = data[1].replace(data[0], '');
           a = a.replace(data[2], '');
@@ -80,8 +81,8 @@ module.exports = {
           const path = a.filter((v)=>{
             return v;
           })
-          return `/${buildConfig.publicPath}/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
-        }, // 访问的相对路径
+          return `/${buildConfig.relativePath}/${path[2]}/${path[1]}/${path[3]}/${data[0]}`;
+        }, 
         outputPath: (...data)=>{
           let a = data[1].replace(data[0], '');
           a = a.replace(data[2], '');
