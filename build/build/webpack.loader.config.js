@@ -96,6 +96,28 @@ module.exports = {
         limit: 10000, // 限制10k的大小，小于10k生成base64
       },
     },
+    {
+      loader: 'image-webpack-loader',
+      options: {
+        mozjpeg: {
+          progessive: true,
+          quality: 65,
+        },
+        optipng: {
+          enabled: true,
+        },
+        pngquant: {
+          quality: [0.65, 0.90],
+          speed: 4,
+        },
+        gifsicle: {
+          interlaced: false,
+        },
+        webp: {
+          quality: 75,
+        },
+      },
+    },
   ],
   // html文件处理
   htmlLoader: [

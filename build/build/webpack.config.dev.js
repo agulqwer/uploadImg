@@ -39,4 +39,8 @@ module.exports = {
     // 当开启HMR的时候使用该插件会显示模块的相对路径，建议用于开发环境
     new webpack.NamedModulesPlugin(),
   ],
+  optimization: {
+    //模块内未使用的部分不进行 导出
+    useExports: true
+  }
 };
